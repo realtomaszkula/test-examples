@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+  <div>In parent component: {{ value }}</div>
+  <app-counter [value]="value" (valueChange)="value = $event"></app-counter>
+  `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo';
+  value = 5;
 }
