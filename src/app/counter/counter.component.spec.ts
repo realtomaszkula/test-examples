@@ -6,9 +6,11 @@ import { cpus } from 'os';
 describe('CounterComponent', () => {
   let component: CounterComponent;
   let fixture: ComponentFixture<CounterComponent>;
-  const decrementButton = (): HTMLButtonElement => fixture.nativeElement.querySelector('[data-test="decrement"]')
+
   const incrementButton = (): HTMLButtonElement => fixture.nativeElement.querySelector('[data-test="increment"]')
+  const decrementButton = (): HTMLButtonElement => fixture.nativeElement.querySelector('[data-test="decrement"]')
   const counterValue = (): HTMLDivElement => fixture.nativeElement.querySelector('[data-test="counterValue"]')
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CounterComponent]
@@ -22,38 +24,33 @@ describe('CounterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should display decrement button', () => {
-    expect(decrementButton()).not.toBeNull()
-  })
-
   it('should display increment button', () => {
     expect(incrementButton()).not.toBeNull()
   })
-
+  it('should display decrement burron', () => {
+    expect(decrementButton()).not.toBeNull()
+  })
   it('should display counter value', () => {
     expect(counterValue()).not.toBeNull()
   })
-
-  it('should disabled button when counter is zero', () => {
+  it('should disable button when counter is 0', () => {
     component.value = 0;
+    fixture.detectChanges();
     expect(decrementButton().hasAttribute('disabled')).toBe(true)
-    component.value = 1;
-    fixture.detectChanges()
-    expect(decrementButton().hasAttribute('disabled')).toBe(false)
   })
-
-  it('clicking on increment button should increment counter', () => {
+  it('should increment counter when button clicked', () => {
     component.value = 0;
+    fixture.detectChanges();
     incrementButton().click();
     expect(component.value).toBe(1)
   })
-
-  it('clicking on decrement button should decrement counter', () => {
+  it('should decrement counter when button clicked', () => {
     component.value = 1;
     fixture.detectChanges()
     decrementButton().click()
     expect(component.value).toBe(0)
   })
+
 
 
 });
